@@ -49,6 +49,26 @@ function SonarSweep() {
         handleClose();
     }
 
+    const calculateHigherThanPreviousCount = () => depths
+        .filter((d, index) => index > 0 && d.depth > depths[index - 1].depth)
+        .length
+
+
+    const calculateThreeMeasurementCount = () => {
+
+        const threeMeasurementDepths: number[] = [];
+
+        depths.forEach((d, index) => {
+            if (index < depths.length - 2) {
+                threeMeasurementDepths.push(d.depth + depths[index + 1].depth + depths[index + 2].depth)
+            }
+        });
+
+        return threeMeasurementDepths
+            .filter((d, index) => index > 0 && d > threeMeasurementDepths[index - 1])
+            .length
+    }
+
     return (
         <div>
             <Typography align="center" variant="h1" component="div" gutterBottom>
@@ -71,9 +91,11 @@ function SonarSweep() {
             </Stack>
 
             <Typography align="center" variant="h5" component="div">
-                Higher measurement count: {depths
-                    .filter((d, index) => index > 0 && d.depth > depths[index - 1].depth)
-                    .length}
+                Higher measurement count: {calculateHigherThanPreviousCount()}
+            </Typography>
+
+            <Typography align="center" variant="h5" component="div">
+                Higher measurement in three measurement count: {calculateThreeMeasurementCount()}
             </Typography>
 
             <Dialog open={open} onClose={handleClose}>
