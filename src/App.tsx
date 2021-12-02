@@ -1,10 +1,10 @@
 import './App.css'
-import SonarSweep from './days/1/SonarSweep'
+import Dive from './days/2/Dive'
 
 function App() {
 
   return (
-    <SonarSweep />
+    <Dive />
   )
 }
 
