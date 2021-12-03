@@ -1,10 +1,10 @@
 import './App.css'
-import Dive from './days/2/Dive'
+import BinaryDiagnostic from './days/3/BinaryDiagnostic'
 
 function App() {
 
   return (
-    <Dive />
+    <BinaryDiagnostic />
   )
 }
 
