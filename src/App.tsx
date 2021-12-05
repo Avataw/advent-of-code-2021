@@ -1,10 +1,10 @@
 import './App.css'
-import BinaryDiagnostic from './days/3/BinaryDiagnostic'
+import GiantSquid from './days/4/GiantSquid'
 
 function App() {
 
   return (
-    <BinaryDiagnostic />
+    <GiantSquid />
   )
 }
 
