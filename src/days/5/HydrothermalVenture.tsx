@@ -90,15 +90,12 @@ export default function GiantSquid() {
               : overlaps.set(point.x + "," + point.y, 0);
           }
         }
-
-
-
       }
     });
 
     const result = Array.from(overlaps.entries()).filter(overlap => overlap[1] > 0);
-    console.log("all points " + Array.from(overlaps.entries()).length + " and actual overlaps: " + result.length, result);
 
+    setSolution(result.length)
     setDialogOpen(false);
 
   }

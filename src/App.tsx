@@ -1,10 +1,10 @@
 import './App.css'
-import HydrothermalVenture from './days/5/HydrothermalVenture'
+import LanternFish from './days/6/LanternFish'
 
 function App() {
 
   return (
-    <HydrothermalVenture />
+    <LanternFish />
   )
 }
 
