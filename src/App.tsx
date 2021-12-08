@@ -1,10 +1,10 @@
 import './App.css'
-import LanternFish from './days/6/LanternFish'
+import SevenSegmentSearch from './days/8/SevenSegmentSearch'
 
 function App() {
 
   return (
-    <LanternFish />
+    <SevenSegmentSearch />
   )
 }
 
