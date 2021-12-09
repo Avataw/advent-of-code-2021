@@ -18,7 +18,7 @@ class Point {
 
 class LavaMap {
     inputLines: string[];
-    points: Point[] = [];
+    points: Map<string, Point> = new Map<string, Point>();
     Basins: number[] = [];
 
     constructor(lines: string[]) {
@@ -34,23 +34,23 @@ class LavaMap {
                     : 0
 
                 const point = new Point(x, y, height, riskLevel);
-                this.points.push(point);
+                this.points.set(x + "," + y, point)
             }
         }
     }
 
     findBasins(): number[] {
-        return this.points.map(p => this.findBasinSizeForPoint(p)).filter(b => b != 0)
+        return Array.from(this.points.values()).filter(p => p.riskLevel != 0).map(p => this.findBasinSizeForPoint(p));
     }
 
     private findBasinSizeForPoint(point: Point | undefined): number {
         if (point == undefined) return 0;
         if (point.height == 9 || point.inBasin) return 0;
 
-        const pointAbove = this.points.find(p => p.x === point.x && p.y === point.y - 1);
-        const pointDown = this.points.find(p => p.x === point.x && p.y === point.y + 1);
-        const pointRight = this.points.find(p => p.x === point.x + 1 && p.y === point.y);
-        const pointLeft = this.points.find(p => p.x === point.x - 1 && p.y === point.y);
+        const pointAbove = this.points.get(point.x + "," + (point.y - 1));
+        const pointDown = this.points.get(point.x + "," + (point.y + 1));
+        const pointRight = this.points.get((point.x + 1) + "," + point.y);
+        const pointLeft = this.points.get((point.x - 1) + "," + point.y);
 
         point.inBasin = true;
 
@@ -80,18 +80,15 @@ export default function SmokeBasin() {
 
         const lavaMap = new LavaMap(input);
 
-        const riskSum = lavaMap.points
+        const riskSum = Array.from(lavaMap.points.values())
             .map(point => point.riskLevel)
             .reduce((sum, current) => sum + current, 0);
 
         console.log("Solution for A: ", riskSum);
 
-        console.time("testB");
         const sortedBasins = lavaMap.findBasins().sort((a, b) => b - a);
         const result = sortedBasins[0] * sortedBasins[1] * sortedBasins[2]
-        console.timeEnd("testB");
 
-        console.log(sortedBasins)
         console.log("Solution for B: ", result);
 
         setDialogOpen(false);
