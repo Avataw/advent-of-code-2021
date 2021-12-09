@@ -1,10 +1,10 @@
 import './App.css'
-import SevenSegmentSearch from './days/8/SevenSegmentSearch'
+import SmokeBasin from './days/9/SmokeBasin'
 
 function App() {
 
   return (
-    <SevenSegmentSearch />
+    <SmokeBasin />
   )
 }
 
